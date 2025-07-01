@@ -8,9 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{18B7F407-E0D1-420E-987E-FDEA809A34CD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2743FB74-4650-4ECD-AC1D-D80A785E0372}"
-	ProjectSection(SolutionItems) = preProject
-		.gitkeep = .gitkeep
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5DE62EB3-5D8B-42AE-BCC2-590C15937751}"
 	ProjectSection(SolutionItems) = preProject
