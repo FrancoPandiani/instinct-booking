@@ -17,6 +17,14 @@ namespace Instinct.Booking.Persistence.Configuration
             entityBuilder.Property(x => x.Code).IsRequired();
             entityBuilder.Property(x => x.UserId).IsRequired();
             entityBuilder.Property(x => x.CustomerId).IsRequired();
+
+            entityBuilder.HasOne(x => x.User)
+                .WithMany(x => x.Bookings)
+                .HasForeignKey(x => x.UserId);
+
+            entityBuilder.HasOne(x => x.Customer)
+                .WithMany(x => x.Bookings)
+                .HasForeignKey(x => x.CustomerId);
         }
     }
 }
