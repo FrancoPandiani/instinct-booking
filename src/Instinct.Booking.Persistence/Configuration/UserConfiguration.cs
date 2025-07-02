@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace Instinct.Booking.Persistence.Configuration
 {
     public class UserConfiguration
-    {// Usar siempre expresión lambda para el builder de EF Core.
+    {
+        // Usar siempre expresión lambda para el builder de EF Core.
         public UserConfiguration(EntityTypeBuilder<UserEntity> entityBuilder)
         {
             entityBuilder.HasKey(x => x.UserId);
@@ -17,7 +18,6 @@ namespace Instinct.Booking.Persistence.Configuration
             entityBuilder.Property(x => x.LastName).IsRequired();
             entityBuilder.Property(x => x.UserName).IsRequired();
             entityBuilder.Property(x => x.Password).IsRequired();
-
         }
     }
 }
