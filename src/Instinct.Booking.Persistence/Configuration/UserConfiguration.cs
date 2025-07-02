@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 
 namespace Instinct.Booking.Persistence.Configuration
 {
@@ -18,6 +19,11 @@ namespace Instinct.Booking.Persistence.Configuration
             entityBuilder.Property(x => x.LastName).IsRequired();
             entityBuilder.Property(x => x.UserName).IsRequired();
             entityBuilder.Property(x => x.Password).IsRequired();
+
+            // Un usuario siempre va a tener muchas reservas.
+            entityBuilder.HasMany(x => x.Bookings)
+                .WithOne(x=>x.User)
+                .HasForeignKey(x=>x.UserId);
         }
     }
 }
