@@ -1,4 +1,5 @@
-﻿using Instinct.Booking.Domain.Entities.Booking;
+﻿using Instinct.Booking.Application.Interfaces;
+using Instinct.Booking.Domain.Entities.Booking;
 using Instinct.Booking.Domain.Entities.Customer;
 using Instinct.Booking.Domain.Entities.User;
 using Instinct.Booking.Persistence.Configuration;
@@ -11,7 +12,8 @@ using System.Threading.Tasks;
 
 namespace Instinct.Booking.Persistence.DataBase
 {
-    public class DataBaseService : DbContext
+    // Persistence SI puede apuntar a Application y consumir las interfaces, respeta las reglas de dependencia.
+    public class DataBaseService : DbContext, IDataBaseService
     {
         public DataBaseService(DbContextOptions options): base(options)
         {
