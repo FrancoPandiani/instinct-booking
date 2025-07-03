@@ -1,20 +1,22 @@
+using Instinct.Booking.Api;
+using Instinct.Booking.Application;
 using Instinct.Booking.Application.Interfaces;
+using Instinct.Booking.Common;
+using Instinct.Booking.External;
+using Instinct.Booking.Persistence;
 using Instinct.Booking.Persistence.DataBase;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Agrego SQL server y la cadena de conexión a la bd
-builder.Services.AddDbContext<DataBaseService>(options =>
-options.UseSqlServer(builder.Configuration["SQLConnectionString"]));
-
-builder.Services.AddScoped<IDataBaseService, DataBaseService>();
-
-// Agrego servicios al contenedor
-builder.Services.AddControllers();
+// Referencias a los servicios de injección de dependencia
+builder.Services
+    .AddWebApi()
+    .AddCommon()
+    .AddApplication()
+    .AddExternal(builder.Configuration)
+    .AddPersistence(builder.Configuration);
 
 var app = builder.Build();
-
-app.MapControllers();
 
 app.Run();
