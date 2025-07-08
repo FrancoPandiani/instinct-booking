@@ -1,4 +1,4 @@
-﻿using Instinct.Booking.Application.Interfaces;
+﻿using Instinct.Booking.Application.DataBase;
 using Instinct.Booking.Persistence.DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
