@@ -1,4 +1,5 @@
-﻿namespace Instinct.Booking.Api
+﻿
+namespace Instinct.Booking.Api
 {
     public static class DependencyInjectionService
     {

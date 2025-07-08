@@ -1,11 +1,8 @@
 using Instinct.Booking.Api;
 using Instinct.Booking.Application;
-using Instinct.Booking.Application.DataBase;
 using Instinct.Booking.Common;
 using Instinct.Booking.External;
 using Instinct.Booking.Persistence;
-using Instinct.Booking.Persistence.DataBase;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
