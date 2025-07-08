@@ -1,4 +1,4 @@
-﻿using Instinct.Booking.Application.Interfaces;
+﻿using Instinct.Booking.Application.DataBase;
 using Instinct.Booking.Domain.Entities.Booking;
 using Instinct.Booking.Domain.Entities.Customer;
 using Instinct.Booking.Domain.Entities.User;

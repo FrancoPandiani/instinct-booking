@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Instinct.Booking.Application.Interfaces
+namespace Instinct.Booking.Application.DataBase
 {
     // Esta interfaz si puede ser consumida por api
     public interface IDataBaseService
