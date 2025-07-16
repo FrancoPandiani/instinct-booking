@@ -4,6 +4,7 @@ using Instinct.Booking.Application.DataBase.User.Commands.CreateUser;
 using Instinct.Booking.Application.DataBase.User.Commands.DeleteUser;
 using Instinct.Booking.Application.DataBase.User.Commands.UpdateUser;
 using Instinct.Booking.Application.DataBase.User.Queries.GetAllUser;
+using Instinct.Booking.Application.DataBase.User.Queries.GetUserById;
 using Instinct.Booking.Application.DataBase.User.UpdateUserPassword;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +23,7 @@ namespace Instinct.Booking.Application
             services.AddTransient<IDeleteUserCommand, DeleteUserCommand>();
             services.AddTransient<IUpdateUserPasswordCommand, UpdateUserPasswordCommand>();
             services.AddTransient<IGetAllUserQuery, GetAllUserQuery>();
+            services.AddTransient<IGetUserByIdQuery, GetUserByIdQuery>();
             
             return services;
         }
