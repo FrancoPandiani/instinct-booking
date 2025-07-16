@@ -21,8 +21,8 @@ namespace Instinct.Booking.Persistence.DataBase
         }
 
         public DbSet<UserEntity> User { get; set; }
-        public DbSet<UserEntity> Customer { get; set; }
-        public DbSet<UserEntity> Booking { get; set; }
+        public DbSet<CustomerEntity> Customer { get; set; }
+        public DbSet<BookingEntity> Booking { get; set; }
 
         public async Task<bool> SaveAsync()
         { 

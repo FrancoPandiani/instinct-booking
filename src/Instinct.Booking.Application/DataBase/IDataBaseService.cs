@@ -1,4 +1,6 @@
-﻿using Instinct.Booking.Domain.Entities.User;
+﻿using Instinct.Booking.Domain.Entities.Booking;
+using Instinct.Booking.Domain.Entities.Customer;
+using Instinct.Booking.Domain.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace Instinct.Booking.Application.DataBase
@@ -7,8 +9,8 @@ namespace Instinct.Booking.Application.DataBase
     public interface IDataBaseService
     {
         public DbSet<UserEntity> User { get; set; }
-        public DbSet<UserEntity> Customer { get; set; }
-        public DbSet<UserEntity> Booking { get; set; }
+        public DbSet<CustomerEntity> Customer { get; set; }
+        public DbSet<BookingEntity> Booking { get; set; }
 
         Task<bool> SaveAsync();
     }
