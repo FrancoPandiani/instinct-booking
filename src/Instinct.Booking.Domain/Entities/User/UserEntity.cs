@@ -1,9 +1,5 @@
-﻿using Instinct.Booking.Domain.Entities.Booking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Instinct.Booking.Domain.Entities.Booking;
 
 namespace Instinct.Booking.Domain.Entities.User
 {
