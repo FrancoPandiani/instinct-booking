@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Instinct.Booking.Application.DataBase.Customer.Commands.CreateCustomer;
+using Instinct.Booking.Application.DataBase.Customer.Queries.GetAllCustomers;
 using Instinct.Booking.Application.DataBase.User.Commands.CreateUser;
 using Instinct.Booking.Application.DataBase.User.Commands.UpdateUser;
 using Instinct.Booking.Application.DataBase.User.Queries.GetAllUser;
@@ -21,6 +22,7 @@ namespace Instinct.Booking.Application.Configuration
             CreateMap<UserEntity, GetUserByUserNameAndPasswordModel>().ReverseMap();
             
             CreateMap<CustomerEntity, CreateCustomerModel>().ReverseMap();
+            CreateMap<CustomerEntity, GetAllCustomerModel>().ReverseMap();
 
         }
     }
