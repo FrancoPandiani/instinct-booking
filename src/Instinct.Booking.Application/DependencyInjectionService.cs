@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Instinct.Booking.Application.Configuration;
-using Instinct.Booking.Application.DataBase.Customer.Commands;
+using Instinct.Booking.Application.DataBase.Customer.Commands.CreateCustomer;
 using Instinct.Booking.Application.DataBase.User.Commands.CreateUser;
 using Instinct.Booking.Application.DataBase.User.Commands.DeleteUser;
 using Instinct.Booking.Application.DataBase.User.Commands.UpdateUser;

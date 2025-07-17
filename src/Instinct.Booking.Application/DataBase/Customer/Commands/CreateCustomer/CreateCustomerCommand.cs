@@ -2,7 +2,7 @@
 using AutoMapper;
 using Instinct.Booking.Domain.Entities.Customer;
 
-namespace Instinct.Booking.Application.DataBase.Customer.Commands
+namespace Instinct.Booking.Application.DataBase.Customer.Commands.CreateCustomer
 {
     public class CreateCustomerCommand : ICreateCustomerCommand
     {
