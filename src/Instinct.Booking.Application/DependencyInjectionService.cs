@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Instinct.Booking.Application.Configuration;
+using Instinct.Booking.Application.DataBase.Bookings.Commands.CreateBooking;
 using Instinct.Booking.Application.DataBase.Customer.Commands.CreateCustomer;
 using Instinct.Booking.Application.DataBase.Customer.Commands.DeleteCustomer;
 using Instinct.Booking.Application.DataBase.Customer.Queries.GetAllCustomers;
@@ -37,6 +38,10 @@ namespace Instinct.Booking.Application
             services.AddTransient<IDeleteCustomerCommand, DeleteCustomerCommand>();
             services.AddTransient<IGetAllCustomersQuery, GetAllCustomersQuery>();
             services.AddTransient<IGetCustomerByIdQuery, GetCustomerByIdQuery>();
+            #endregion
+
+            #region Bookings
+            services.AddTransient<ICreateBookingCommand, CreateBookingCommand>();
             #endregion
 
             return services;
