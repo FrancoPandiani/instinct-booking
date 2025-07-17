@@ -4,12 +4,12 @@ using Instinct.Booking.Domain.Entities.Customer;
 
 namespace Instinct.Booking.Application.DataBase.Customer.Commands
 {
-    public class CreateCustomerModelCommand : ICreateCustomerCommand
+    public class CreateCustomerCommand : ICreateCustomerCommand
     {
         private readonly IDataBaseService _dataBaseService;
         private readonly IMapper _mapper;
 
-        public CreateCustomerModelCommand(IDataBaseService dataBaseService, IMapper mapper)
+        public CreateCustomerCommand(IDataBaseService dataBaseService, IMapper mapper)
         {
             _dataBaseService = dataBaseService;
             _mapper = mapper;
