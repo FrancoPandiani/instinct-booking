@@ -1,5 +1,4 @@
-﻿
-namespace Instinct.Booking.Application.DataBase.Customer.Commands
+﻿namespace Instinct.Booking.Application.DataBase.Customer.Commands.CreateCustomer
 {
     public interface ICreateCustomerCommand
     {
