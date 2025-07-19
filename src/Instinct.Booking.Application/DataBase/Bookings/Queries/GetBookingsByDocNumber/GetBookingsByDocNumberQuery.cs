@@ -1,37 +1,34 @@
 ﻿
 using AutoMapper;
+using Instinct.Booking.Application.DataBase.Bookings.Queries.GetAllBookings;
 using Microsoft.EntityFrameworkCore;
 
-namespace Instinct.Booking.Application.DataBase.Bookings.Queries.GetAllBookings
+namespace Instinct.Booking.Application.DataBase.Bookings.Queries.GetBookingsByDocNumber
 {
-    public class GetAllBookingsQuery : IGetAllBookingsQuery
+    public class GetBookingsByDocNumberQuery : IGetBookingsByDocNumberQuery
     {
         private readonly IDataBaseService _dataBaseService;
         private readonly IMapper _mapper;
 
-        public GetAllBookingsQuery(IDataBaseService dataBaseService, IMapper mapper)
+        public GetBookingsByDocNumberQuery(IDataBaseService dataBaseService, IMapper mapper)
         {
             _dataBaseService = dataBaseService;
             _mapper = mapper;
         }
-
-        // Utilizo LINQ
-        public async Task<List<GetAllBookingsModel>> Execute()
+        // Utilizo nuevamente LINQ
+        public async Task<List<GetBookingsByDocNumberModel>> Execute(string docNumber)
         {
             var result = await (from booking in _dataBaseService.Booking
                                 join customer in _dataBaseService.Customer
                                 on booking.CustomerId equals customer.CustomerId
-                                select new GetAllBookingsModel
+                                where customer.DocumentNumber == docNumber
+                                select new GetBookingsByDocNumberModel
                                 {
-                                    BookingId = booking.BookingId,
                                     Code = booking.Code,
                                     RegisterDate = booking.RegisterDate,
-                                    Type = booking.Type,
-                                    CustomerFullName = customer.FullName,
-                                    CustomerDocNumber = customer.DocumentNumber
+                                    Type = booking.Type
                                 }).ToListAsync();
             return result;
         }
     }
-
 }

@@ -2,36 +2,34 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
-namespace Instinct.Booking.Application.DataBase.Bookings.Queries.GetAllBookings
+namespace Instinct.Booking.Application.DataBase.Bookings.Queries.GetBookingsByType
 {
-    public class GetAllBookingsQuery : IGetAllBookingsQuery
+    public class GetBookingsByTypeQuery : IGetBookingsByTypeQuery
     {
         private readonly IDataBaseService _dataBaseService;
         private readonly IMapper _mapper;
 
-        public GetAllBookingsQuery(IDataBaseService dataBaseService, IMapper mapper)
+        public GetBookingsByTypeQuery(IDataBaseService dataBaseService, IMapper mapper)
         {
             _dataBaseService = dataBaseService;
             _mapper = mapper;
         }
 
-        // Utilizo LINQ
-        public async Task<List<GetAllBookingsModel>> Execute()
+        public async Task<List<GetBookingsByTypeModel>> Execute(string type)
         {
             var result = await (from booking in _dataBaseService.Booking
                                 join customer in _dataBaseService.Customer
                                 on booking.CustomerId equals customer.CustomerId
-                                select new GetAllBookingsModel
+                                where booking.Type == type
+                                select new GetBookingsByTypeModel
                                 {
-                                    BookingId = booking.BookingId,
                                     Code = booking.Code,
                                     RegisterDate = booking.RegisterDate,
                                     Type = booking.Type,
                                     CustomerFullName = customer.FullName,
-                                    CustomerDocNumber = customer.DocumentNumber
+                                    CustomerDocumentNumber = customer.DocumentNumber
                                 }).ToListAsync();
             return result;
         }
     }
-
 }
