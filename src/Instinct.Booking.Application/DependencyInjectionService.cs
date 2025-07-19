@@ -2,6 +2,7 @@
 using Instinct.Booking.Application.Configuration;
 using Instinct.Booking.Application.DataBase.Bookings.Commands.CreateBooking;
 using Instinct.Booking.Application.DataBase.Bookings.Queries.GetAllBookings;
+using Instinct.Booking.Application.DataBase.Bookings.Queries.GetBookingsByDocNumber;
 using Instinct.Booking.Application.DataBase.Customer.Commands.CreateCustomer;
 using Instinct.Booking.Application.DataBase.Customer.Commands.DeleteCustomer;
 using Instinct.Booking.Application.DataBase.Customer.Queries.GetAllCustomers;
@@ -44,6 +45,8 @@ namespace Instinct.Booking.Application
             #region Bookings
             services.AddTransient<ICreateBookingCommand, CreateBookingCommand>();
             services.AddTransient<IGetAllBookingsQuery, GetAllBookingsQuery>();
+            services.AddTransient<IGetBookingsByDocNumberQuery, GetBookingsByDocNumberQuery>();
+            services.AddTransient<IGetBookingsByDocNumberQuery, GetBookingsByDocNumberQuery>();
             #endregion
 
             return services;
