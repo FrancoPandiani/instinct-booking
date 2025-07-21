@@ -1,7 +1,8 @@
 ﻿
 namespace Instinct.Booking.Application.DataBase.Customer.Queries.GetCustomerByDocNumber
 {
-    internal interface IGetCustomerByDocNumberQuery
+    public interface IGetCustomerByDocNumberQuery
     {
+        Task<GetCustomerByDocNumberModel> Execute(string docNumber);
     }
 }
