@@ -1,11 +1,13 @@
 ﻿
+using Instinct.Booking.Application.SendGridEmail;
+using Instinct.Booking.Domain.Models.SendGridEmail;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Text;
 
 namespace Instinct.Booking.External.SendGridEmail
 {
-    public class SendGridEmailService
+    public class SendGridEmailService : ISendGridEmailService
     {
         private readonly IConfiguration _configuration;
 
@@ -14,7 +16,7 @@ namespace Instinct.Booking.External.SendGridEmail
             _configuration = configuration;
         }
 
-        public async Task<bool> Execute(SendGridEmailModel model)
+        public async Task<bool> Execute(SendGridEmailRequestModel model)
         {
             string apiKey = _configuration["SendGridEmailKey"];
             string apiUrl = "https://api.sendgrid.com/v3/mail/send";
