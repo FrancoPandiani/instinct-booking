@@ -4,18 +4,13 @@ using Instinct.Booking.Domain.Entities.Customer;
 using Instinct.Booking.Domain.Entities.User;
 using Instinct.Booking.Persistence.Configuration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Instinct.Booking.Persistence.DataBase
 {
     // Persistence SI puede apuntar a Application y consumir las interfaces, respeta las reglas de dependencia.
     public class DataBaseService : DbContext, IDataBaseService
     {
-        public DataBaseService(DbContextOptions options): base(options)
+        public DataBaseService(DbContextOptions options) : base(options)
         {
 
         }
@@ -25,7 +20,7 @@ namespace Instinct.Booking.Persistence.DataBase
         public DbSet<BookingEntity> Booking { get; set; }
 
         public async Task<bool> SaveAsync()
-        { 
+        {
             return await SaveChangesAsync() > 0;
         }
 
