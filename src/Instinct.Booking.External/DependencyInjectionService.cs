@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Instinct.Booking.Application.SendGridEmail;
+using Instinct.Booking.External.SendGridEmail;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Instinct.Booking.External
@@ -7,6 +9,7 @@ namespace Instinct.Booking.External
     {
         public static IServiceCollection AddExternal(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddSingleton<ISendGridEmailService, SendGridEmailService>();
             return services;
         }
     }

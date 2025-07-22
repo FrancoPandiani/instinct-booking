@@ -1,7 +1,7 @@
 ﻿
 namespace Instinct.Booking.Domain.Models.SendGridEmail
 {
-    public class SendGridRequestModel
+    public class SendGridEmailRequestModel
     {
         public ContentEmail From { get; set; }
         public List<Personalization> Personalizations { get; set; }
