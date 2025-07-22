@@ -16,6 +16,7 @@ using Instinct.Booking.Application.DataBase.User.Queries.GetAllUser;
 using Instinct.Booking.Application.DataBase.User.Queries.GetUserById;
 using Instinct.Booking.Application.DataBase.User.Queries.GetUserByUserNameAndPassword;
 using Instinct.Booking.Application.DataBase.User.UpdateUserPassword;
+using Instinct.Booking.Application.Validators.Booking;
 using Instinct.Booking.Application.Validators.Customer;
 using Instinct.Booking.Application.Validators.User;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,7 +56,7 @@ namespace Instinct.Booking.Application
             services.AddTransient<IGetBookingsByDocNumberQuery, GetBookingsByDocNumberQuery>();
             #endregion
 
-            #region Validator
+            #region Validators
             services.AddScoped<IValidator<CreateUserModel>, CreateUserValidator>();
             services.AddScoped<IValidator<UpdateUserModel>, UpdateUserValidator>();
             services.AddScoped<IValidator<UpdateUserPasswordModel>, UpdateUserPasswordValidator>();
@@ -64,6 +65,7 @@ namespace Instinct.Booking.Application
             services.AddScoped<IValidator<CreateCustomerModel>,CreateCustomerValidator>();
             services.AddScoped<IValidator<UpdateCustomerModel>,UpdateCustomerValidator>();
 
+            services.AddScoped<IValidator<CreateBookingModel>,CreateBookingValidator>();
             #endregion
 
 
