@@ -6,6 +6,7 @@ using Instinct.Booking.Application.DataBase.Bookings.Queries.GetAllBookings;
 using Instinct.Booking.Application.DataBase.Bookings.Queries.GetBookingsByDocNumber;
 using Instinct.Booking.Application.DataBase.Customer.Commands.CreateCustomer;
 using Instinct.Booking.Application.DataBase.Customer.Commands.DeleteCustomer;
+using Instinct.Booking.Application.DataBase.Customer.Commands.UpdateCustomer;
 using Instinct.Booking.Application.DataBase.Customer.Queries.GetAllCustomers;
 using Instinct.Booking.Application.DataBase.Customer.Queries.GetCustomerById;
 using Instinct.Booking.Application.DataBase.User.Commands.CreateUser;
@@ -15,6 +16,7 @@ using Instinct.Booking.Application.DataBase.User.Queries.GetAllUser;
 using Instinct.Booking.Application.DataBase.User.Queries.GetUserById;
 using Instinct.Booking.Application.DataBase.User.Queries.GetUserByUserNameAndPassword;
 using Instinct.Booking.Application.DataBase.User.UpdateUserPassword;
+using Instinct.Booking.Application.Validators.Customer;
 using Instinct.Booking.Application.Validators.User;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -58,6 +60,10 @@ namespace Instinct.Booking.Application
             services.AddScoped<IValidator<UpdateUserModel>, UpdateUserValidator>();
             services.AddScoped<IValidator<UpdateUserPasswordModel>, UpdateUserPasswordValidator>();
             services.AddScoped<IValidator<(string, string)>, GetUserByUserNameAndPasswordValidator>();
+
+            services.AddScoped<IValidator<CreateCustomerModel>,CreateCustomerValidator>();
+            services.AddScoped<IValidator<UpdateCustomerModel>,UpdateCustomerValidator>();
+
             #endregion
 
 
