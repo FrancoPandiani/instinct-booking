@@ -22,9 +22,9 @@ namespace Instinct.Booking.Application
 {
     public static class DependencyInjectionService
     {
-        public static IServiceCollection AddApplication (this IServiceCollection services)
+        public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            var mapper = new MapperConfiguration(config => { config.AddProfile(new MapperProfile());});
+            var mapper = new MapperConfiguration(config => { config.AddProfile(new MapperProfile()); });
 
             // Registro AutoMapper como única instancia
             services.AddSingleton(mapper.CreateMapper());
@@ -57,7 +57,7 @@ namespace Instinct.Booking.Application
             services.AddScoped<IValidator<CreateUserModel>, CreateUserValidator>();
             services.AddScoped<IValidator<UpdateUserModel>, UpdateUserValidator>();
             services.AddScoped<IValidator<UpdateUserPasswordModel>, UpdateUserPasswordValidator>();
-            services.AddScoped<IValidator<(string,string)>, GetUserByUserNameAndPasswordValidator>();
+            services.AddScoped<IValidator<(string, string)>, GetUserByUserNameAndPasswordValidator>();
             #endregion
 
 
