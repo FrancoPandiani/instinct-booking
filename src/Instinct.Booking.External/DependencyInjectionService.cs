@@ -2,8 +2,11 @@
 using Instinct.Booking.Application.SendGridEmail;
 using Instinct.Booking.External.GetTokenJwt;
 using Instinct.Booking.External.SendGridEmail;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Instinct.Booking.External
 {
@@ -14,6 +17,19 @@ namespace Instinct.Booking.External
             services.AddSingleton<ISendGridEmailService, SendGridEmailService>();
             services.AddSingleton<IGetTokenJwtService, GetTokenJwtService>();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
+            {
+                option.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["SecretKeyJwt"])),
+                    ValidIssuer = configuration["IssuerJwt"],
+                    ValidAudience = configuration["AudienceJwt"]
+                };
+            });
             return services;
         }
     }

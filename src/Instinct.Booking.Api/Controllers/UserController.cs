@@ -8,10 +8,13 @@ using Instinct.Booking.Application.DataBase.User.Queries.GetUserByUserNameAndPas
 using Instinct.Booking.Application.DataBase.User.UpdateUserPassword;
 using Instinct.Booking.Application.Exceptions;
 using Instinct.Booking.Application.Features;
+using Instinct.Booking.Application.GetTokenJwt;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Instinct.Booking.Api.Controllers
 {
+    [Authorize]
     [Route("api/v1/user")]
     [ApiController]
     [TypeFilter(typeof(ExceptionManager))]
@@ -102,12 +105,14 @@ namespace Instinct.Booking.Api.Controllers
             return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data));
 
         }
-
+        //Omito la autorización exclusivamente para este endpoint
+        [AllowAnonymous]
         [HttpGet("get-by-username-password/{userName}/{password}")]
         public async Task<IActionResult> GetByUserNamePassword(
             string userName, string password,
             [FromServices] IGetUserByUserNameAndPasswordQuery getUserByUserNameAndPasswordQuery,
-            [FromServices] IValidator<(string, string)> validator)
+            [FromServices] IValidator<(string, string)> validator,
+            [FromServices] IGetTokenJwtService getTokenJwtService)
         {
             var validate = await validator.ValidateAsync((userName, password));
             if (!validate.IsValid)
@@ -117,6 +122,9 @@ namespace Instinct.Booking.Api.Controllers
 
             if (data == null)
                 return StatusCode(StatusCodes.Status404NotFound, ResponseApiService.Response(StatusCodes.Status404NotFound));
+
+            data.Token = getTokenJwtService.Execute(data.UserId.ToString());
+
             return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data));
         }
     }
