@@ -8,6 +8,7 @@ using Instinct.Booking.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 #region KeyVault
+/*
 var keyVaultUrl = builder.Configuration["keyVaultUrl"] ?? string.Empty;
 
 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "local")
@@ -23,7 +24,9 @@ else
 {
     builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), new DefaultAzureCredential());
 }
+*/
 #endregion
+
 
 #region Dependency Injection Setup
 
@@ -36,8 +39,16 @@ builder.Services
 #endregion
 
 builder.Services.AddControllers();
-
 var app = builder.Build();
+
+#region Swagger
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json","v1");
+    options.RoutePrefix = string.Empty;
+});
+#endregion
 
 app.UseAuthentication();
 app.UseAuthorization();
