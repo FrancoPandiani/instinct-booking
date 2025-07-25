@@ -1,7 +1,10 @@
-﻿using Instinct.Booking.Application.GetTokenJwt;
+﻿using Instinct.Booking.Application.ApplicationInsights;
+using Instinct.Booking.Application.GetTokenJwt;
 using Instinct.Booking.Application.SendGridEmail;
+using Instinct.Booking.External.ApplicationInsights;
 using Instinct.Booking.External.GetTokenJwt;
 using Instinct.Booking.External.SendGridEmail;
+using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +20,7 @@ namespace Instinct.Booking.External
             services.AddSingleton<ISendGridEmailService, SendGridEmailService>();
             services.AddSingleton<IGetTokenJwtService, GetTokenJwtService>();
 
+            #region JWT
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {
                 option.TokenValidationParameters = new TokenValidationParameters
@@ -30,6 +34,15 @@ namespace Instinct.Booking.External
                     ValidAudience = configuration["AudienceJwt"]
                 };
             });
+            #endregion
+
+            object value = services.AddApplicationInsightsTelemetry(new ApplicationInsightsServiceOptions
+            {
+                ConnectionString = configuration["ApplicationInsightsConnectionString"]
+            });
+
+            services.AddSingleton<IInsertApplicationInsightsService, InsertApplicationInsightsService>();
+
             return services;
         }
     }
