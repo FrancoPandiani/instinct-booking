@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Instinct.Booking.Common\Instinct.Booking.Common.csproj" />
     <ProjectReference Include="..\Instinct.Booking.Domain\Instinct.Booking.Domain.csproj" />
   </ItemGroup>
 
