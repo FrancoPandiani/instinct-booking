@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Instinct.Booking.Application.ApplicationInsights;
 using Instinct.Booking.Application.DataBase.User.Commands.CreateUser;
 using Instinct.Booking.Application.DataBase.User.Commands.DeleteUser;
 using Instinct.Booking.Application.DataBase.User.Commands.UpdateUser;
@@ -9,6 +10,8 @@ using Instinct.Booking.Application.DataBase.User.UpdateUserPassword;
 using Instinct.Booking.Application.Exceptions;
 using Instinct.Booking.Application.Features;
 using Instinct.Booking.Application.GetTokenJwt;
+using Instinct.Booking.Common.Constants;
+using Instinct.Booking.Domain.ApplicationInsights;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +23,11 @@ namespace Instinct.Booking.Api.Controllers
     [TypeFilter(typeof(ExceptionManager))]
     public class UserController : ControllerBase
     {
+        private readonly IInsertApplicationInsightsService _insertApplicationInsightsService;
+        public UserController(IInsertApplicationInsightsService insertApplicationInsightsService)
+        {
+            _insertApplicationInsightsService = insertApplicationInsightsService;
+        }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create(
@@ -82,6 +90,15 @@ namespace Instinct.Booking.Api.Controllers
         public async Task<IActionResult> GetAll(
             [FromServices] IGetAllUserQuery getAllUserQuery)
         {
+            #region Application Insights
+            var metric = new InsertApplicationInsightsModel(
+               ApplicationInsightsConstants.METRIC_TYPE_API_CALL,
+               EntitiesConstants.USER,
+               "get-all");
+
+            _insertApplicationInsightsService.Execute(metric);
+            #endregion
+
             var data = await getAllUserQuery.Execute();
 
             if (data == null || data.Count == 0)
@@ -95,6 +112,15 @@ namespace Instinct.Booking.Api.Controllers
             int userId,
             [FromServices] IGetUserByIdQuery getUserByIdQuery)
         {
+            #region Application Insights 
+            var metric = new InsertApplicationInsightsModel(
+               ApplicationInsightsConstants.METRIC_TYPE_API_CALL,
+               EntitiesConstants.USER,
+               "get-by-id");
+
+            _insertApplicationInsightsService.Execute(metric);
+            #endregion
+
             if (userId == 0)
                 return StatusCode(StatusCodes.Status400BadRequest, ResponseApiService.Response(StatusCodes.Status400BadRequest));
             var data = await getUserByIdQuery.Execute(userId);
@@ -114,6 +140,15 @@ namespace Instinct.Booking.Api.Controllers
             [FromServices] IValidator<(string, string)> validator,
             [FromServices] IGetTokenJwtService getTokenJwtService)
         {
+            #region Application Insights 
+            var metric = new InsertApplicationInsightsModel(
+               ApplicationInsightsConstants.METRIC_TYPE_API_CALL,
+               EntitiesConstants.USER,
+               "get-by-username-password");
+
+            _insertApplicationInsightsService.Execute(metric);
+            #endregion
+
             var validate = await validator.ValidateAsync((userName, password));
             if (!validate.IsValid)
                 return StatusCode(StatusCodes.Status400BadRequest, ResponseApiService.Response(StatusCodes.Status400BadRequest, validate.Errors));
