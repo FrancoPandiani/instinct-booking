@@ -12,9 +12,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{5DE62EB3-5D8B-42AE-BCC2-590C15937751}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{8917755F-BFC1-4F1B-8BB0-1F968A056453}"
-	ProjectSection(SolutionItems) = preProject
-		.gitkeep = .gitkeep
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Instinct.Booking.Api", "src\Instinct.Booking.Api\Instinct.Booking.Api.csproj", "{17575B94-E456-44FE-9512-9F8657BEF2C9}"
 EndProject

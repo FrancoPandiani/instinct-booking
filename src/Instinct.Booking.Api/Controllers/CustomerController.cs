@@ -103,7 +103,6 @@ namespace Instinct.Booking.Api.Controllers
 
             return StatusCode(StatusCodes.Status200OK, ResponseApiService.Response(StatusCodes.Status200OK, data));
 
-
         }
     }
 }

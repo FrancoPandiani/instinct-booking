@@ -1,5 +1,4 @@
-﻿
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
 
 namespace Instinct.Booking.Api
@@ -8,6 +7,7 @@ namespace Instinct.Booking.Api
     {
         public static IServiceCollection AddWebApi (this IServiceCollection services)
         {
+            #region Swagger Configuration
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
@@ -16,6 +16,9 @@ namespace Instinct.Booking.Api
                     Title = "Instict Booking API",
                     Description = "Administración de APIs para booking app"
                 });
+                
+
+                #region Swagger Security
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme 
                 {
                     In = ParameterLocation.Header,
@@ -41,12 +44,17 @@ namespace Instinct.Booking.Api
                         new string []{}
                     }
                 });
+                #endregion
 
+                #region Swagger XML Comments
                 // ruta de archivo documentado
                 var fileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,fileName));
+                #endregion
             }
             );
+            #endregion
+
             return services;
         }
     }

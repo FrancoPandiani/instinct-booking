@@ -4,7 +4,6 @@ using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Configuration;
-using System.Configuration;
 
 namespace Instinct.Booking.External.ApplicationInsights
 {
@@ -16,7 +15,7 @@ namespace Instinct.Booking.External.ApplicationInsights
             _configuration = configuration;
         }
 
-        public bool Execute(InsertApplicationInsightsModel metric) 
+        public bool Execute(InsertApplicationInsightsModel metric)
         {
             if (metric == null)
                 throw new ArgumentNullException(nameof(metric));
