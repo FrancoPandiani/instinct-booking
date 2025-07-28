@@ -1,4 +1,3 @@
-using Azure.Identity;
 using Instinct.Booking.Api;
 using Instinct.Booking.Application;
 using Instinct.Booking.Common;
@@ -7,7 +6,7 @@ using Instinct.Booking.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#region KeyVault
+#region KeyVault Configuration
 /*
 var keyVaultUrl = builder.Configuration["keyVaultUrl"] ?? string.Empty;
 
@@ -27,7 +26,6 @@ else
 */
 #endregion
 
-
 #region Dependency Injection Setup
 
 builder.Services
@@ -45,12 +43,16 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json","v1");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
 #endregion
 
+#region Middleware Pipeline
 app.UseAuthentication();
 app.UseAuthorization();
+#endregion
+
 app.MapControllers();
+
 app.Run();
